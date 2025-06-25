@@ -8,7 +8,7 @@ let trendingSongs = [];
 // ✅ Load Songs from Backend
 // ✅ Attach artist image click inside window.onload
 window.onload = function () {
-  fetch('http://localhost:5000/api/songs')
+  fetch('https://music-web-application-t5mj.onrender.com//api/songs')
     .then(res => res.json())
     .then(allSongs => {
       renderRecentlyPlayed();
