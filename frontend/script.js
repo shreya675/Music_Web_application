@@ -8,7 +8,7 @@ let trendingSongs = [];
 // ✅ Load Songs from Backend
 // ✅ Attach artist image click inside window.onload
 window.onload = function () {
-  fetch('https://music-web-application-t5mj.onrender.com//api/songs')
+  fetch('https://music-web-application-t5mj.onrender.com/api/songs')
     .then(res => res.json())
     .then(allSongs => {
       renderRecentlyPlayed();
@@ -29,7 +29,7 @@ window.onload = function () {
 
 
 function loadTrendingSongs(callback) {
-  fetch('http://localhost:5000/api/songs/trending')
+  fetch('https://music-web-application-t5mj.onrender.com/api/songs/trending')
     .then(res => res.json())
     .then(fetchedTrendingSongs => {
       trendingSongs = fetchedTrendingSongs;
@@ -43,14 +43,14 @@ function loadTrendingSongs(callback) {
         card.setAttribute('data-title', song.title);
         card.setAttribute('data-artist', song.artist);
         card.setAttribute('data-image', song.imageUrl);
-        card.setAttribute('data-audio', `http://localhost:5000${song.audioUrl}`);
+        card.setAttribute('data-audio', `https://music-web-application-t5mj.onrender.com${song.audioUrl}`);
 
         card.innerHTML = `
           <div class="play-overlay play-card-btn"
                data-title="${song.title}"
                data-artist="${song.artist}"
                data-image="${song.imageUrl}"
-               data-audio="http://localhost:5000${song.audioUrl}">
+               data-audio="https://music-web-application-t5mj.onrender.com${song.audioUrl}">
             <i class="fas fa-play"></i>
           </div>
           <img src="${song.imageUrl}" alt="${song.title} Cover" class="artist-image" data-artist="${song.artist}">
@@ -74,7 +74,7 @@ function loadTrendingSongs(callback) {
 }
 
 function loadNewReleasesFromDB() {
-  fetch('http://localhost:5000/api/songs/new-releases')
+  fetch('https://music-web-application-t5mj.onrender.com/api/songs/new-releases')
     .then(res => res.json())
     
     .then(newReleases => {
@@ -105,7 +105,7 @@ function loadNewReleasesFromDB() {
               data-title="${song.title}"
               data-artist="${song.artist}"
               data-image="${song.imageUrl}"
-              data-audio="http://localhost:5000${song.audioUrl}">
+              data-audio="https://music-web-application-t5mj.onrender.com${song.audioUrl}">
               <i class="fas fa-play"></i>
             </button>
           </div>
@@ -347,7 +347,7 @@ function renderRecentlyPlayed() {
 
 
 function showArtistOverlay(artistName) {
-  fetch('http://localhost:5000/api/songs')
+  fetch('https://music-web-application-t5mj.onrender.com/api/songs')
     .then(res => res.json())
     .then(songs => {
       const filtered = songs.filter(song => song.artist.toLowerCase() === artistName.toLowerCase());
@@ -369,7 +369,7 @@ function showArtistOverlay(artistName) {
               data-title="${song.title}"
               data-artist="${song.artist}"
               data-image="${song.imageUrl}"
-              data-audio="http://localhost:5000${song.audioUrl}">
+              data-audio="https://music-web-application-t5mj.onrender.com${song.audioUrl}">
               <i class="fas fa-play"></i>
             </div>
           </div>
