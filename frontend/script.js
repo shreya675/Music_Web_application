@@ -205,6 +205,8 @@ function playSongFromQueue() {
   if (!song) return;
 
   if (currentAudio) currentAudio.pause();
+  console.log("🎧 Audio URL:", song.audioUrl);
+
   currentAudio = new Audio(song.audioUrl);
   currentAudio.play();
   
