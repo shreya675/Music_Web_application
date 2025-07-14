@@ -1573,7 +1573,6 @@
   }
 }
 
-
 @media (max-width: 768px) {
   .music-player.active {
     display: flex;
@@ -1582,25 +1581,28 @@
     padding: 10px 14px;
     width: 95%;
     max-width: 100%;
-    bottom: 14px;
+    bottom: 12px;
     border-radius: 16px;
     height: 70px;
-    gap: 12px;
+    gap: 16px;
+    flex-direction: row;
   }
 
+  /* 🎵 Album image */
   .music-player img#now-playing-img {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     border-radius: 12px;
     object-fit: cover;
-    margin: 0;
   }
 
+  /* ❌ Hide song title and seek bar */
   .player-info,
   .seek-bar-container {
     display: none;
   }
 
+  /* 🎧 Centered play/pause + next/prev controls */
   .player-center {
     flex: 1;
     display: flex;
@@ -1610,16 +1612,16 @@
   .player-controls {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 20px;
   }
 
   .player-btn {
-    font-size: 20px;
-    padding: 8px;
-    color: white;
+    font-size: 22px;
     background: none;
     border: none;
+    color: white;
     cursor: pointer;
+    padding: 8px;
   }
 
   .player-btn i {
