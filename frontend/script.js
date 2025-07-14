@@ -8,7 +8,7 @@ let trendingSongs = [];
 // ✅ Load Songs from Backend
 // ✅ Attach artist image click inside window.onload
 window.onload = function () {
-  fetch('https://music-web-application-t5mj.onrender.com/api/songs')
+  fetch('http://localhost:5000/api/songs')
     .then(res => res.json())
     .then(allSongs => {
       renderRecentlyPlayed();
@@ -29,7 +29,7 @@ window.onload = function () {
 
 
 function loadTrendingSongs(callback) {
-  fetch('https://music-web-application-t5mj.onrender.com/api/songs/trending')
+  fetch('http://localhost:5000/api/songs/trending')
     .then(res => res.json())
     .then(fetchedTrendingSongs => {
       trendingSongs = fetchedTrendingSongs;
@@ -40,17 +40,14 @@ function loadTrendingSongs(callback) {
       trendingSongs.forEach(song => {
         const card = document.createElement('div');
         card.classList.add('track-card');
-        card.setAttribute('data-title', song.title);
-        card.setAttribute('data-artist', song.artist);
-        card.setAttribute('data-image', song.imageUrl);
-        card.setAttribute('data-audio', `https://music-web-application-t5mj.onrender.com${song.audioUrl}`);
+        
 
         card.innerHTML = `
           <div class="play-overlay play-card-btn"
                data-title="${song.title}"
                data-artist="${song.artist}"
                data-image="${song.imageUrl}"
-               data-audio="https://music-web-application-t5mj.onrender.com${song.audioUrl}">
+               data-audio="http://localhost:5000${song.audioUrl}">
             <i class="fas fa-play"></i>
           </div>
           <img src="${song.imageUrl}" alt="${song.title} Cover" class="artist-image" data-artist="${song.artist}">
@@ -62,6 +59,35 @@ function loadTrendingSongs(callback) {
           <div class="track-actions">
             <span class="duration">${song.duration}</span>
           </div>
+
+                <div class="card-options">
+                  <button class="options-btn"><i class="fas fa-ellipsis-v"></i></button>
+                  <div class="options-menu">
+                  <div class="option add-to-fav"
+                  data-title="${song.title}"
+                  data-artist="${song.artist}"
+                  data-image="${song.imageUrl}"
+                  data-audio="http://localhost:5000${song.audioUrl}">
+                  ❤️ Add to Favourites
+                </div>
+                <div class="option add-to-queue"
+                  data-title="${song.title}"
+                  data-artist="${song.artist}"
+                  data-image="${song.imageUrl}"
+                  data-audio="http://localhost:5000${song.audioUrl}">
+                  📥 Add to Queue
+                </div>
+                <div class="option add-to-playlist"
+                  data-title="${song.title}"
+                  data-artist="${song.artist}"
+                  data-image="${song.imageUrl}"
+                  data-audio="http://localhost:5000${song.audioUrl}">
+                  ➕ Add to Playlist
+                </div>
+              </div>
+            </div>
+
+
         `;
         trendingContainer.appendChild(card);
       });
@@ -74,7 +100,7 @@ function loadTrendingSongs(callback) {
 }
 
 function loadNewReleasesFromDB() {
-  fetch('https://music-web-application-t5mj.onrender.com/api/songs/new-releases')
+  fetch('http://localhost:5000/api/songs/new-releases')
     .then(res => res.json())
     
     .then(newReleases => {
@@ -90,31 +116,40 @@ function loadNewReleasesFromDB() {
       container.innerHTML = '';
 
       newReleases.forEach(song => {
-        const card = document.createElement('div');
-        card.classList.add('track-card');
-        card.innerHTML = `
-          <img src="${song.imageUrl}" alt="${song.title} Cover">
+  const card = document.createElement('div');
+  card.classList.add('track-card');
 
-          <div class="track-info">
-            <h4>${song.title}</h4>
-            <p>${song.artist}</p>
-          </div>
-          <div class="track-actions">
-            <span class="duration">${song.duration || '--:--'}</span>
-            <button class="play-card-btn"
-              data-title="${song.title}"
-              data-artist="${song.artist}"
-              data-image="${song.imageUrl}"
-              data-audio="https://music-web-application-t5mj.onrender.com${song.audioUrl}">
-              <i class="fas fa-play"></i>
-            </button>
-          </div>
-        `;
-        container.appendChild(card);
+  // ❌ DO NOT set data-title/data-audio on this card
+
+    card.innerHTML = `
+      <img src="${song.imageUrl}" alt="${song.title} Cover">
+      <div class="track-info">
+        <h4>${song.title}</h4>
+        <p>${song.artist}</p>
+      </div>
+      <div class="track-actions">
+        <span class="duration">${song.duration || '--:--'}</span>
+        <button class="play-card-btn"
+          data-title="${song.title}"
+          data-artist="${song.artist}"
+          data-image="${song.imageUrl}"
+          data-audio="http://localhost:5000${song.audioUrl}">
+          <i class="fas fa-play"></i>
+        </button>
+      </div>
+    `;
+
+      // ✅ Prevent card from triggering play
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('.play-card-btn')) {
+          e.stopPropagation(); // Do nothing on full card click
+        }
       });
-    })
-    .catch(err => {
-      console.error("❌ Failed to load new releases:", err);
+
+      container.appendChild(card);
+    });
+
+  
     });
 }
 
@@ -141,18 +176,25 @@ document.addEventListener('click', function (e) {
   }
 
   // ✅ If full card is clicked (but not the button)
-  if (clickedCard && !e.target.closest('.play-card-btn')) {
-    const song = {
-      title: clickedCard.getAttribute('data-title'),
-      artist: clickedCard.getAttribute('data-artist'),
-      imageUrl: clickedCard.getAttribute('data-image'),
-      audioUrl: clickedCard.getAttribute('data-audio')
-    };
+      if (clickedCard && !e.target.closest('.play-card-btn')) {
+      // 🛡 Prevent false trigger if card has no data
+      if (
+        clickedCard.hasAttribute('data-title') &&
+        clickedCard.hasAttribute('data-audio')
+      ) {
+        const song = {
+          title: clickedCard.getAttribute('data-title'),
+          artist: clickedCard.getAttribute('data-artist'),
+          imageUrl: clickedCard.getAttribute('data-image'),
+          audioUrl: clickedCard.getAttribute('data-audio')
+        };
 
-    audioQueue = [song];
-    currentIndex = 0;
-    playSongFromQueue();
-  }
+        audioQueue = [song];
+        currentIndex = 0;
+        playSongFromQueue();
+      }
+    }
+
 });
 
 
@@ -164,8 +206,6 @@ function playSongFromQueue() {
   if (currentAudio) currentAudio.pause();
   currentAudio = new Audio(song.audioUrl);
   currentAudio.play();
-
-  updateRecentlyPlayed(song);
   
   const seekBar = document.getElementById('seek-bar');
   const currentTimeText = document.getElementById('current-time');
@@ -347,7 +387,7 @@ function renderRecentlyPlayed() {
 
 
 function showArtistOverlay(artistName) {
-  fetch('https://music-web-application-t5mj.onrender.com/api/songs')
+  fetch('http://localhost:5000/api/songs')
     .then(res => res.json())
     .then(songs => {
       const filtered = songs.filter(song => song.artist.toLowerCase() === artistName.toLowerCase());
@@ -369,7 +409,7 @@ function showArtistOverlay(artistName) {
               data-title="${song.title}"
               data-artist="${song.artist}"
               data-image="${song.imageUrl}"
-              data-audio="https://music-web-application-t5mj.onrender.com${song.audioUrl}">
+              data-audio="http://localhost:5000${song.audioUrl}">
               <i class="fas fa-play"></i>
             </div>
           </div>
@@ -386,4 +426,55 @@ function showArtistOverlay(artistName) {
       overlay.style.display = 'flex';
     });
 }
+
+
+// ✅ Menu click handler for 3-dot options
+document.addEventListener('click', function (e) {
+  // Toggle 3-dot options menu
+  const optionsBtn = e.target.closest('.options-btn');
+  if (optionsBtn) {
+    const menu = optionsBtn.nextElementSibling;
+    document.querySelectorAll('.options-menu').forEach(m => m.style.display = 'none');
+    menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    return;
+  }
+
+  // Hide all menus if clicked outside
+  if (!e.target.closest('.options-menu')) {
+    document.querySelectorAll('.options-menu').forEach(m => m.style.display = 'none');
+  }
+
+  // Handle Add to Favourites
+  if (e.target.classList.contains('add-to-fav')) {
+    const song = extractSongData(e.target);
+    console.log('❤️ Add to Favourites:', song);
+    return;
+  }
+
+  // Handle Add to Queue
+  if (e.target.classList.contains('add-to-queue')) {
+    const song = extractSongData(e.target);
+    audioQueue.push(song);
+    console.log('📥 Added to Queue:', song.title);
+    return;
+  }
+
+  // Handle Add to Playlist
+  if (e.target.classList.contains('add-to-playlist')) {
+    const song = extractSongData(e.target);
+    console.log('➕ Add to Playlist:', song.title);
+    return;
+  }
+});
+
+// ✅ Helper function to get song data from a menu item
+function extractSongData(el) {
+  return {
+    title: el.getAttribute('data-title'),
+    artist: el.getAttribute('data-artist'),
+    imageUrl: el.getAttribute('data-image'),
+    audioUrl: el.getAttribute('data-audio')
+  };
+}
+
 
