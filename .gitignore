@@ -2,7 +2,6 @@
 backend/.env
 
 # Ignore uploaded files (songs, images etc.)
-backend/uploads/
 
 
 # Ignore log/system files
