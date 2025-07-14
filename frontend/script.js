@@ -8,7 +8,7 @@ let trendingSongs = [];
 // ✅ Load Songs from Backend
 // ✅ Attach artist image click inside window.onload
 window.onload = function () {
-  fetch('http://music-web-application-t5mj.onrender.com/api/songs')
+  fetch('https://music-web-application-t5mj.onrender.com/api/songs')
     .then(res => res.json())
     .then(allSongs => {
       renderRecentlyPlayed();
@@ -29,7 +29,7 @@ window.onload = function () {
 
 
 function loadTrendingSongs(callback) {
-  fetch('http://music-web-application-t5mj.onrender.com/api/songs/trending')
+  fetch('https://music-web-application-t5mj.onrender.com/api/songs/trending')
     .then(res => res.json())
     .then(fetchedTrendingSongs => {
       trendingSongs = fetchedTrendingSongs;
@@ -47,7 +47,7 @@ function loadTrendingSongs(callback) {
                data-title="${song.title}"
                data-artist="${song.artist}"
                data-image="${song.imageUrl}"
-               data-audio="http://music-web-application-t5mj.onrender.com${song.audioUrl}">
+               data-audio="https://music-web-application-t5mj.onrender.com${song.audioUrl}">
             <i class="fas fa-play"></i>
           </div>
           <img src="${song.imageUrl}" alt="${song.title} Cover" class="artist-image" data-artist="${song.artist}">
@@ -67,21 +67,21 @@ function loadTrendingSongs(callback) {
                   data-title="${song.title}"
                   data-artist="${song.artist}"
                   data-image="${song.imageUrl}"
-                  data-audio="http://localhost:5000${song.audioUrl}">
+                  data-audio="https://music-web-application-t5mj.onrender.com${song.audioUrl}">
                   ❤️ Add to Favourites
                 </div>
                 <div class="option add-to-queue"
                   data-title="${song.title}"
                   data-artist="${song.artist}"
                   data-image="${song.imageUrl}"
-                  data-audio="http://localhost:5000${song.audioUrl}">
+                  data-audio="https://music-web-application-t5mj.onrender.com${song.audioUrl}">
                   📥 Add to Queue
                 </div>
                 <div class="option add-to-playlist"
                   data-title="${song.title}"
                   data-artist="${song.artist}"
                   data-image="${song.imageUrl}"
-                  data-audio="http://localhost:5000${song.audioUrl}">
+                  data-audio="https://music-web-application-t5mj.onrender.com${song.audioUrl}">
                   ➕ Add to Playlist
                 </div>
               </div>
@@ -133,7 +133,7 @@ function loadNewReleasesFromDB() {
           data-title="${song.title}"
           data-artist="${song.artist}"
           data-image="${song.imageUrl}"
-          data-audio="http://localhost:5000${song.audioUrl}">
+          data-audio="https://music-web-application-t5mj.onrender.com${song.audioUrl}">
           <i class="fas fa-play"></i>
         </button>
       </div>
@@ -387,7 +387,7 @@ function renderRecentlyPlayed() {
 
 
 function showArtistOverlay(artistName) {
-  fetch('http://music-web-application-t5mj.onrender.com/api/songs')
+  fetch('https://music-web-application-t5mj.onrender.com/api/songs')
     .then(res => res.json())
     .then(songs => {
       const filtered = songs.filter(song => song.artist.toLowerCase() === artistName.toLowerCase());
@@ -409,7 +409,7 @@ function showArtistOverlay(artistName) {
               data-title="${song.title}"
               data-artist="${song.artist}"
               data-image="${song.imageUrl}"
-              data-audio="music-web-application-t5mj.onrender.com${song.audioUrl}">
+              data-audio="https://music-web-application-t5mj.onrender.com${song.audioUrl}">
               <i class="fas fa-play"></i>
             </div>
           </div>
