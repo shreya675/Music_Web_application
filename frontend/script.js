@@ -47,7 +47,8 @@ function loadTrendingSongs(callback) {
                data-title="${song.title}"
                data-artist="${song.artist}"
                data-image="${song.imageUrl}"
-               data-audio="https://music-web-application-t5mj.onrender.com${song.audioUrl}">
+               data-audio="${song.audioUrl.startsWith('http') ? song.audioUrl : `https://music-web-application-t5mj.onrender.com${song.audioUrl}`}"
+
             <i class="fas fa-play"></i>
           </div>
           <img src="${song.imageUrl}" alt="${song.title} Cover" class="artist-image" data-artist="${song.artist}">
