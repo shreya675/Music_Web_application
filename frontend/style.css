@@ -1575,47 +1575,49 @@
 
 @media (max-width: 768px) {
   .music-player.active {
-    flex-direction: row;
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 10px;
+    padding: 10px 16px;
     width: 95%;
     max-width: 100%;
-    bottom: 12px;
-    border-radius: 14px;
-    gap: 12px;
-    height: auto;
+    bottom: 14px;
+    border-radius: 18px;
+    height: 70px; /* Increased height */
+    gap: 16px;
   }
 
-  /* 🖼️ Compact album image */
+  /* 🎵 Album image slightly bigger */
   .music-player img#now-playing-img {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
+    width: 55px;
+    height: 55px;
+    border-radius: 12px;
     object-fit: cover;
     margin: 0;
   }
 
-  /* ❌ Hide song title & artist name */
+  /* ❌ Hide title, artist & seek bar */
   .player-info,
   .seek-bar-container {
     display: none;
   }
 
-  /* ▶️ Controls (play/pause only) */
+  /* ▶️ Center play/pause control */
+  .player-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
   .player-controls {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
   }
 
   .player-btn {
-    font-size: 18px;
-    padding: 6px;
-  }
-
-  .player-center {
-    flex: none;
+    font-size: 22px;
+    padding: 10px;
   }
 }
 
