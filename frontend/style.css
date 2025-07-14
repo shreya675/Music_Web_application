@@ -312,8 +312,8 @@
   }
 
   .playlist-card .playlist-image img {
-    width: 160px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
   }
 
   .playlist-info .sub-heading {
@@ -894,6 +894,11 @@
     width: 32px;
     height: 32px;
     font-size: 18px;
+  }
+}
+@media (max-width: 768px) {
+  #recently-played-section {
+    width: 100%;
   }
 }
 
@@ -1529,6 +1534,95 @@
 .player-right i:hover {
   color: #fff;
   cursor: pointer;
+}
+@media (max-width: 768px) {
+  .trending-songs-panel {
+    padding: 10px;
+  }
+
+  .trending-songs-list {
+    max-height: 250px; /* Limit height so it's scrollable */
+    overflow-y: auto;
+    width: 100%;
+    padding-right: 5px;
+  }
+
+  .trending-songs-list .track-card {
+    flex-direction: row; /* keep horizontal layout */
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+  }
+
+  .trending-songs-list .track-info h4 {
+    font-size: 14px;
+  }
+
+  .trending-songs-list .track-info p {
+    font-size: 12px;
+  }
+
+  .trending-songs-list .track-card img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .trending-songs-list .track-actions {
+    font-size: 12px;
+    margin: 0;
+  }
+}
+@media (max-width: 768px) {
+  .music-player.active {
+    padding: 10px;
+    gap: 12px;
+    flex-direction: column;
+    width: 95%;
+    bottom: 10px;
+    border-radius: 18px;
+  }
+
+  .music-player img#now-playing-img {
+    width: 45px;
+    height: 45px;
+    margin-right: 8px;
+  }
+
+  .player-info h4 {
+    font-size: 16px;
+  }
+
+  .player-info p {
+    font-size: 12px;
+  }
+
+  .player-controls {
+    gap: 15px;
+  }
+
+  .player-btn {
+    padding: 10px;
+    font-size: 18px;
+  }
+
+  .seek-bar-container span {
+    font-size: 12px;
+  }
+
+  #seek-bar {
+    height: 4px;
+  }
+}
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .main-content {
+    overflow-y: auto;
+    max-height: calc(100vh - 180px); /* leave room for player & sidebar */
+  }
 }
 
 
