@@ -1578,59 +1578,44 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 12px;
+    padding: 6px 10px;
     width: 95%;
     max-width: 100%;
     bottom: 12px;
     border-radius: 14px;
-    gap: 10px;
+    gap: 12px;
+    height: auto;
   }
 
-  /* 🖼️ Album image */
+  /* 🖼️ Compact album image */
   .music-player img#now-playing-img {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 8px;
     object-fit: cover;
     margin: 0;
   }
 
-  /* 🚫 Hide song name and artist */
-  .player-info {
+  /* ❌ Hide song title & artist name */
+  .player-info,
+  .seek-bar-container {
     display: none;
   }
 
-  /* ▶️ Controls (play/pause/next/prev) */
+  /* ▶️ Controls (play/pause only) */
   .player-controls {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
   }
 
   .player-btn {
-    font-size: 16px;
+    font-size: 18px;
     padding: 6px;
   }
 
-  /* ⏱️ Seek bar */
-  .seek-bar-container {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex: 1;
-    padding-left: 10px;
-  }
-
-  .seek-bar-container span {
-    font-size: 10px;
-    width: 30px;
-    text-align: center;
-  }
-
-  #seek-bar {
-    height: 4px;
-    flex: 1;
-    border-radius: 4px;
+  .player-center {
+    flex: none;
   }
 }
 
