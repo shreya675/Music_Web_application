@@ -1578,51 +1578,33 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 12px;
+    padding: 8px 12px;
     width: 95%;
     max-width: 100%;
-    bottom: 10px;
-    border-radius: 12px;
-    gap: 8px;
+    bottom: 12px;
+    border-radius: 14px;
+    gap: 10px;
   }
 
+  /* 🖼️ Album image */
   .music-player img#now-playing-img {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     border-radius: 8px;
     object-fit: cover;
+    margin: 0;
   }
 
-  .player-left {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex: 1;
-  }
-
+  /* 🚫 Hide song name and artist */
   .player-info {
-    display: flex;
-    flex-direction: column;
+    display: none;
   }
 
-  .player-info h4 {
-    font-size: 14px;
-    margin: 0;
-  }
-
-  .player-info p {
-    font-size: 12px;
-    margin: 0;
-  }
-
-  .player-center {
+  /* ▶️ Controls (play/pause/next/prev) */
+  .player-controls {
     display: flex;
     align-items: center;
-    gap: 10px;
-  }
-
-  .player-controls {
-    gap: 10px;
+    gap: 14px;
   }
 
   .player-btn {
@@ -1630,24 +1612,25 @@
     padding: 6px;
   }
 
+  /* ⏱️ Seek bar */
   .seek-bar-container {
-    flex: 2;
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 0 8px;
+    flex: 1;
+    padding-left: 10px;
   }
 
   .seek-bar-container span {
     font-size: 10px;
-    width: 35px;
+    width: 30px;
     text-align: center;
   }
 
   #seek-bar {
     height: 4px;
-    width: 100%;
     flex: 1;
+    border-radius: 4px;
   }
 }
 
