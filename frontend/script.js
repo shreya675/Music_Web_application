@@ -100,7 +100,7 @@ function loadTrendingSongs(callback) {
 }
 
 function loadNewReleasesFromDB() {
-  fetch('http://music-web-application-t5mj.onrender.com/api/songs/new-releases')
+  fetch('https://music-web-application-t5mj.onrender.com/api/songs/new-releases')
     .then(res => res.json())
     
     .then(newReleases => {
