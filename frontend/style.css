@@ -1572,24 +1572,27 @@
     margin: 0;
   }
 }
+
 @media (max-width: 768px) {
   .music-player.active {
-    padding: 10px;
-    gap: 12px;
+    padding: 8px 12px;
+    gap: 10px;
     flex-direction: column;
     width: 95%;
-    bottom: 10px;
-    border-radius: 18px;
+    bottom: 12px;
+    border-radius: 16px;
+    max-height: 150px; /* shrink vertical size */
   }
 
   .music-player img#now-playing-img {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     margin-right: 8px;
+    border-radius: 8px;
   }
 
   .player-info h4 {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .player-info p {
@@ -1597,22 +1600,32 @@
   }
 
   .player-controls {
-    gap: 15px;
+    gap: 12px;
   }
 
   .player-btn {
-    padding: 10px;
-    font-size: 18px;
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  .seek-bar-container {
+    flex-direction: column;
+    gap: 4px;
+    padding: 0;
   }
 
   .seek-bar-container span {
     font-size: 12px;
+    width: auto;
   }
 
   #seek-bar {
     height: 4px;
+    border-radius: 4px;
   }
 }
+
+
 @media (max-width: 768px) {
   html, body {
     overflow-x: hidden;
